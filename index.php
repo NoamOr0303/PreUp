@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PreUp</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        H1 {
+            color: rgb(46, 131, 243);
+            font-size: 24px;
+        }
+    </style>
+
+	<script>
+
+		function handleContinue()
+		{
+			const txtQuestion = document.getElementById("txtQuestion");
+			localStorage.setItem("questionToChatGpt", txtQuestion.value);
+			//document.getElementById("myModal").showModal();
+			//document.getElementById("myModal").classList.add('open');
+			const myModal = new bootstrap.Modal('#myModal');
+      		myModal.show();
+		}
+
+
+		function handleRequest()
+		{
+			let txtStartDate = document.getElementById("startDate");
+			let txtEndDate = document.getElementById("endDate");
+			let txtStartHour = document.getElementById("startHour");
+			let txtEndHour = document.getElementById("endHour");
+
+			console.log("txtStartDate.value=", txtStartDate.value);
+			console.log("txtEndDate.value=", txtEndDate.value);
+			console.log("txtStartHour.value=", txtStartHour.value);
+			console.log("txtEndHour.value=", txtEndHour.value);
+
+			localStorage.setItem("startDate", txtStartDate.value);
+			localStorage.setItem("endDate", txtEndDate.value);
+			localStorage.setItem("startHour", txtStartHour.value);
+			localStorage.setItem("endHour", txtEndHour.value);
+
+
+			//alert("בטיפול");
+			Swal.fire({
+				position: 'top-start',
+				icon: 'success',
+				title: 'בקשתך התקבלה',
+				showConfirmButton: false,
+				timer: 3000
+			});
+
+			setTimeout(() => {
+				window.location.href = "wait_for_lesson2.php";				
+			}, 4000);
+		}
+	</script>
+
+</head>
+<body dir="rtl">
+    <div style="margin: 0 auto; width: 95%;">
+        <div class="mb-4">
+			<img src="img/preup_logo.png" style="width: 255px; height: 80px;"/>
+        </div>
+		<p>ברוכים הבאים לאפליקציה שלנו<br/>הכניסו את החומר למבחן:</p>
+		<textarea id="txtQuestion" rows="10" style="margin-top: 10px; width: 100%;" 
+		placeholder=" החומר למבחן"></textarea>
+        <!-- <button type="btnContinue" class="btn btn-primary" 
+				data-bs-toggle="modal" data-bs-target="#myModal"
+				>המשך</button> -->
+		<!-- <button onclick="askChatGpt(document.getElementById('txtQuestion').value);">שלח</button> -->
+        <button type="btnContinue" class="btn btn-primary" onclick="handleContinue();"				
+				>המשך</button>
+
+
+<!-- The Modal myModal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <!-- <h4 class="modal-title">Modal Heading</h4> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+			<p>הכניסו את התאריכים למבחן:</p>
+			<br>
+			<label for="startDate">מתאריך:</label>
+			<input id="startDate" type="date">
+			<br><br>
+			<label for="endDate">עד תאריך:</label>
+			<input id="endDate" type="date">
+			<br><br>
+
+			<label for="startHour">משעה:</label>
+			<input id="startHour" type="time">
+			<br><br>
+
+			<label for="endHour">עד שעה:</label>
+			<input id="endHour" type="time">
+			<br><br>
+
+		</div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+		<button type="button" class="btn btn-primary" data-bs-dismiss="modal" 
+				onclick="handleRequest()">שלח</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+	</div>    
+
+</body>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+<script>
+
+
+
+</script>
+
+
+</html>
